@@ -24,6 +24,6 @@ export default new Router({
       name: 'NotFound',
       component: PageNotFound
     }
-  ],
-  mode: 'history'
+  ]
+  // mode: 'history'
 })
