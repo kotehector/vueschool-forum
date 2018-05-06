@@ -1,62 +1,23 @@
 <template>
-  <div class="hello">
+  <div class="col-full">
     <h1>Welcome to the Forum!</h1>
-    <div 
-      class="col-large push-top"
-      v-for="thread in threads"
-      :key="thread.key">
-
-      <h2>TITLE THREAD: {{ thread.title }}</h2>
-      
-      <div class="post-list">
-        <div 
-          class="post"
-          v-for="postId in thread.posts"
-          :key="postId">
-          
-          <div class="user-info">
-            <a href="#" class="user-name">{{ users[posts[postId].userId].name }}</a>
-            <a href="#">
-              <img 
-                class="avatar-large"
-                :src="users[posts[postId].userId].avatar" alt="">
-            </a>
-            <p class="desktop-only text-small">
-              107 posts.
-            </p>
-          </div>
-
-          <div class="post-content">
-            <div>
-              {{ posts[postId].text }}
-            </div>
-          </div>
-
-          <div class="post-date text-faded">
-            <div>
-              {{ posts[postId].publishedAt }}
-            </div>
-          </div>
-
-        </div>
-      </div>
-      
-    </div>
+    <ThreadList :threads='threads'/>
   </div>
 </template>
 
 <script>
 import sourceData from '@/data'
-console.log('categories: ', Object.keys(sourceData.categories))
-console.log('forums: ', Object.keys(sourceData.forums))
-console.log('moderators: ', Object.keys(sourceData.moderators))
-console.log('posts: ', Object.keys(sourceData.posts))
-console.log('stats: ', Object.keys(sourceData.stats))
-console.log('threads: ', Object.keys(sourceData.threads))
-console.log('users: ', Object.keys(sourceData.users))
+import ThreadList from './ThreadList'
+
+console.log('sourceData: ', sourceData)
 
 export default {
   name: 'HelloWorld',
+
+  components: {
+    ThreadList
+  },
+
   data () {
     return {
       categories: sourceData.categories,
@@ -64,7 +25,7 @@ export default {
       moderators: sourceData.moderators,
       posts: sourceData.posts,
       stats: sourceData.stats,
-      threads: sourceData.threads,
+      threads: Object.values(sourceData.threads),
       users: sourceData.users
     }
   }
